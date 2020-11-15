@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "boardboard9d157184": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

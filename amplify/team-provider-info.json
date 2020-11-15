@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-boardboard-dev-75902-authRole",
+      "UnauthRoleArn": "arn:aws:iam::892690304832:role/amplify-boardboard-dev-75902-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::892690304832:role/amplify-boardboard-dev-75902-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-boardboard-dev-75902-deployment",
+      "UnauthRoleName": "amplify-boardboard-dev-75902-unauthRole",
+      "StackName": "amplify-boardboard-dev-75902",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:892690304832:stack/amplify-boardboard-dev-75902/77e33f50-26c0-11eb-a825-0a119d28256a",
+      "AmplifyAppId": "df1y9w41ioiye"
+    },
+    "categories": {
+      "auth": {
+        "boardboard9d157184": {}
+      }
+    }
+  }
+}

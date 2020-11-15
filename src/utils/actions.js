@@ -1,0 +1,4 @@
+export const ADD_PLAYER = "ADD_PLAYER";
+export const REMOVE_PLAYER = "REMOVE_PLAYER";
+export const LOADING = "LOADING";
+export const UPDATE_SCORE_FOR_ONE_PLAYER = "UPDATE_SCORE_FOR_ONE_PLAYER";

@@ -1,9 +1,17 @@
 import { createContext, useContext, useReducer } from "react";
-import { addPlayer, removePlayer, setLoading, updateScoreForOnePlayer } from "./reducerFunctions";
-const ADD_PLAYER = "ADD_PLAYER";
-const REMOVE_PLAYER = "REMOVE_PLAYER";
-const LOADING = "LOADING";
-const UPDATE_SCORE_FOR_ONE_PLAYER = "UPDATE_SCORE_FOR_ONE_PLAYER";
+import { 
+  addPlayer, 
+  removePlayer, 
+  setLoading, 
+  updateScoreForOnePlayer 
+} from "./reducerFunctions";
+import { 
+  ADD_PLAYER, 
+  LOADING, 
+  REMOVE_PLAYER, 
+  UPDATE_SCORE_FOR_ONE_PLAYER 
+} from "./actions";
+
 const PlayerContext = createContext();
 const { Provider } = PlayerContext;
 
@@ -26,7 +34,6 @@ const PlayerProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     loading: false,
     players: [],
-    game: ""
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

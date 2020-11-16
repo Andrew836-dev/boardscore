@@ -17,12 +17,12 @@ test("addPlayer adds the passed name into the name property", () => {
   expect(alteredState.players[0].name).toMatch(/Grant/);
 });
 
-test("addPlayer gives the new player an empty score array", () => {
+test("addPlayer gives the new player an empty scores array", () => {
   const testState = {};
 
   const alteredState = addPlayer(testState, "Champ");
-
-  expect(alteredState.players[0].score).toBeInstanceOf(Array);
+  const [firstPlayer] = alteredState.players;
+  expect(firstPlayer.scores).toBeInstanceOf(Array);
 });
 
 test("addPlayer adds the new player to the end of the array", () => {

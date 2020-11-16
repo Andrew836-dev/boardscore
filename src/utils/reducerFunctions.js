@@ -1,6 +1,6 @@
 export const addPlayer = (state, name) => {
   const playerList = state.players || [];
-  playerList.push({ name, score: [] });
+  playerList.push({ name, scores: [] });
 
   return { ...state, loading: false, players: playerList };
 }

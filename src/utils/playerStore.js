@@ -9,7 +9,7 @@ import {
   ADD_PLAYER,
   LOADING,
   REMOVE_PLAYER,
-  UPDATE_SCORE_FOR_ONE_PLAYER
+  ADD_A_SCORE
 } from "./actions";
 
 const PlayerContext = createContext({ loading: false, players: [] });
@@ -23,8 +23,8 @@ const reducer = (state, action) => {
       return setLoading(state);
     case REMOVE_PLAYER:
       return removePlayer(state, action.playerIndex);
-    case UPDATE_SCORE_FOR_ONE_PLAYER:
-      return updateScoreForOnePlayer(state, action.playerIndex, action.scoreChange);
+    case ADD_A_SCORE:
+      return updateScoreForOnePlayer(state, action.playerIndex, action.newScore);
     default:
       return state;
   }

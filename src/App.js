@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { PlayerProvider } from "./utils/playerStore";
+import ScoreBoard from "./components/ScoreBoard";
+import PlayerAdder from "./components/PlayerAdder";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+  return (<PlayerProvider>
+    <div>
+      <header >
+        <h2>Welcome to the score Board for Board games</h2>
       </header>
+      <section>
+        <ScoreBoard />
+        <PlayerAdder />
+      </section>
     </div>
+  </PlayerProvider>
   );
 }
 

@@ -105,7 +105,7 @@ test("submitting the form sends a dispatch", async () => {
     fireEvent.submit(scoreForm);
   });
 
-  expect(mockDispatch).toBeCalledWith({type: ADD_A_SCORE, playerIndex: mockPlayerIndex, newScore: ""});
+  expect(mockDispatch).toBeCalledWith({type: ADD_A_SCORE, playerIndex: mockPlayerIndex, newScore: 0});
 });
 
 test("submitting the form hides the form", async () => {

@@ -12,7 +12,7 @@ function ScoreColumn({ dispatch, playerIndex, player }) {
         onSubmit={event => {
           event.preventDefault();
           const formValue = event.currentTarget.elements.score.value;
-          dispatch({ type: ADD_A_SCORE, playerIndex, newScore: formValue });
+          dispatch({ type: ADD_A_SCORE, playerIndex, newScore: parseInt(formValue) || 0 });
           setScoreEntryVisibility(() => false);
         }}
       >
@@ -22,11 +22,15 @@ function ScoreColumn({ dispatch, playerIndex, player }) {
     }
     {!!scores.length
       && <ul>
-        {scores.map(scores)}
+        {scores.map((score, index) => <li key={name + index} style={scores.length - 1 !== index ? { textDecorationLine: "line-through" } : { textDecorationLine: "none" }}>{score}</li>)}
       </ul>}
-    Total Score: {!scores.length && '0'}
+    Total Score: {!scores.length ? '0' : sumScoreTotals(scores)}
     <button onClick={() => dispatch({ type: REMOVE_PLAYER, playerIndex })}>Remove Player</button>
   </div>;
+}
+
+function sumScoreTotals(scoreArray) {
+  return scoreArray.reduce((a, b) => a + b);
 }
 
 export default ScoreColumn;

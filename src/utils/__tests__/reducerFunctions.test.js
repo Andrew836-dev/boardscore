@@ -26,7 +26,7 @@ test("addPlayer gives the new player an empty scores array", () => {
 });
 
 test("addPlayer adds the new player to the end of the array", () => {
-  const testState = { players: [{ name: "Katie", score: 0 }] };
+  const testState = { players: [{ name: "Katie", scores: [] }] };
 
   const alteredState = addPlayer(testState, "Charli");
 
@@ -52,8 +52,8 @@ test("addPlayer sets loading to false", () => {
 test("removePlayer removes the player at the index passed in", () => {
   const testState = {
     players: [
-      { name: "John", score: 0 },
-      { name: "Steve", score: 0 }
+      { name: "John", scores: [] },
+      { name: "Steve", scores: [] }
     ]
   }
 
@@ -63,7 +63,7 @@ test("removePlayer removes the player at the index passed in", () => {
 });
 
 test("removePlayer doesn't do anything if invalid index is passed", () => {
-  const testState = { players: [{ name: "Sally", score: 0 }], loading: false };
+  const testState = { players: [{ name: "Sally", scores: [] }], loading: false };
 
   const alteredState = removePlayer(testState, 10);
 
@@ -79,7 +79,7 @@ test("removePlayer corrects the error if the array is empty", () => {
 });
 
 test("removePlayer sets loading to false", () => {
-  const testState = { players: [{ name: "Patrick", score: 0 }] };
+  const testState = { players: [{ name: "Patrick", scores: [] }] };
 
   const alteredState = removePlayer(testState, 0);
 
@@ -97,29 +97,29 @@ test("setLoading sets the loading state to true", () => {
 test("updateScoreForOnePlayer does what it says on the can", () => {
   const testState = {
     players: [
-      { name: "Rhonda", score: [] },
-      { name: "Bill", score: [] }
+      { name: "Rhonda", scores: [] },
+      { name: "Bill", scores: [] }
     ]
   }
   const updatedScore = { points: 20, penalties: 0 }
   const targetPlayerIndex = 0;
   const alteredState = updateScoreForOnePlayer(testState, targetPlayerIndex, updatedScore);
 
-  expect(alteredState.players[targetPlayerIndex].score).toMatchObject([updatedScore]);
+  expect(alteredState.players[targetPlayerIndex].scores).toMatchObject([updatedScore]);
 });
 
 test("updateScoreForOnePlayer doesn't change the non-targeted player", () => {
   const testState = {
     players: [
-      { name: "Rhonda", score: [] },
-      { name: "Bill", score: [] }
+      { name: "Rhonda", scores: [] },
+      { name: "Bill", scores: [] }
     ]
   }
   const updatedScore = { points: 20, penalties: 0 }
   const targetPlayerIndex = 0;
   const alteredState = updateScoreForOnePlayer(testState, targetPlayerIndex, updatedScore);
 
-  expect(alteredState.players[1].score).toMatchObject([]);
+  expect(alteredState.players[1].scores).toMatchObject([]);
 });
 
 test("updateScoreFOrOnePlayer does nothing if there's no player list", () => {

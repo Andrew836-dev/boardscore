@@ -19,7 +19,7 @@ export const setLoading = (state, loadingValue = true) => {
 export const updateScoreForOnePlayer = (state, playerIndex, scoreChange) => {
   if (Array.isArray(state.players) && state.players[playerIndex]) {
     let playerList = state.players;
-    playerList[playerIndex].score.push(scoreChange);
+    playerList[playerIndex].scores.push(scoreChange);
 
     return { ...state, loading: false, players: playerList };
   }

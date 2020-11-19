@@ -7,7 +7,17 @@ import "@testing-library/jest-dom/extend-expect";
 import { REMOVE_PLAYER, ADD_A_SCORE } from "../../utils/actions";
 import ScoreColumn from "../ScoreColumn";
 
+function getScoreFormHelper() {
+  return screen.getByLabelText(/new/i);
+}
 
+function getAddScoreButtonHelper() {
+  return screen.getByText(/add/i);
+}
+
+function getRemovePlayerButtonHelper() {
+  return screen.getByText(/remove/i);
+}
 test("Loads and displays the passed name", async () => {
   const testPlayer = { name: "Andrew", scores: [] };
   render(<ScoreColumn player={testPlayer} />);
@@ -29,7 +39,8 @@ test("does not throw if given no props", async () => {
 test("has a 'remove player' button", async () => {
   render(<ScoreColumn />);
 
-  expect(screen.getByText(/remove/i)).toBeInTheDocument();
+  const removePlayerButton = getRemovePlayerButtonHelper();
+  expect(removePlayerButton).toBeInTheDocument();
 });
 
 test("When given a playerIndex and dispatch function as props, it implements them with a 'remove player' button", async () => {
@@ -38,8 +49,9 @@ test("When given a playerIndex and dispatch function as props, it implements the
   const mockDispatch = jest.fn();
   render(<ScoreColumn player={testPlayer} dispatch={mockDispatch} playerIndex={testPlayerIndex} />);
 
+  const removePlayerButton = getRemovePlayerButtonHelper();
   act(() => {
-    fireEvent.click(screen.getByText(/remove/i));
+    fireEvent.click(removePlayerButton);
   });
   expect(mockDispatch).toBeCalledWith({ type: REMOVE_PLAYER, playerIndex: testPlayerIndex });
 });
@@ -47,14 +59,14 @@ test("When given a playerIndex and dispatch function as props, it implements the
 test("Has a button to add a scoring round", async () => {
   render(<ScoreColumn />);
 
-  expect(screen.getByText(/add/i)).toBeInTheDocument();
+  const addButton = getAddScoreButtonHelper();
+  expect(addButton).toBeInTheDocument();
 });
 
 test("Clicking the add score button hides it", async () => {
   render(<ScoreColumn />);
 
-  const addButton = screen.getByText(/add/i);
-
+  const addButton = getAddScoreButtonHelper();
   act(() => {
     fireEvent.click(addButton);
   });
@@ -65,22 +77,25 @@ test("Clicking the add score button hides it", async () => {
 test("clicking the add score button reveals a form to submit the score", async () => {
   render(<ScoreColumn />);
 
+  const addButton = getAddScoreButtonHelper();
   act(() => {
-    fireEvent.click(screen.getByText(/add/i));
+    fireEvent.click(addButton);
   });
 
-  const scoreForm = screen.getByPlaceholderText(/0/);
+  const scoreForm = getScoreFormHelper();
   expect(scoreForm).toBeInTheDocument();
 });
 
 test("losing focus on the form hides it", async () => {
   render(<ScoreColumn />);
 
+  const addButton = getAddScoreButtonHelper();
   act(() => {
-    fireEvent.click(screen.getByText(/add/i));
+    fireEvent.click(addButton);
   });
 
-  const scoreForm = screen.getByPlaceholderText(/0/);
+  const scoreForm = getScoreFormHelper();
+
   expect(scoreForm).toBeInTheDocument();
 
   act(() => {
@@ -96,28 +111,28 @@ test("submitting the form sends a dispatch", async () => {
   render(<ScoreColumn dispatch={mockDispatch} playerIndex={mockPlayerIndex} />);
 
   act(() => {
-    fireEvent.click(screen.getByText(/add/i));
+    fireEvent.click(getAddScoreButtonHelper());
   });
 
-  const scoreForm = screen.getByPlaceholderText(/0/);
+  const scoreForm = getScoreFormHelper();
 
   act(() => {
     fireEvent.submit(scoreForm);
   });
 
-  expect(mockDispatch).toBeCalledWith({type: ADD_A_SCORE, playerIndex: mockPlayerIndex, newScore: 0});
+  expect(mockDispatch).toBeCalledWith({ type: ADD_A_SCORE, playerIndex: mockPlayerIndex, newScore: 0 });
 });
 
 test("submitting the form hides the form", async () => {
-  const mockDispatch = () => {};
+  const mockDispatch = () => { };
   render(<ScoreColumn dispatch={mockDispatch} />)
 
-  const addButton = screen.getByText(/add/i);
+  const addButton = getAddScoreButtonHelper();
   act(() => {
     fireEvent.click(addButton);
   });
 
-  const scoreForm = screen.getByPlaceholderText(/0/);
+  const scoreForm = getScoreFormHelper();
   act(() => {
     fireEvent.submit(scoreForm);
   });

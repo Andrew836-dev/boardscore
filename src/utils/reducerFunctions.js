@@ -5,6 +5,14 @@ export const addPlayer = (state, name) => {
   return { ...state, loading: false, players: playerList };
 }
 
+export const resetScores = (state) => {
+  const playerList = state.players || [];
+  playerList.forEach(player => {
+    player.scores = [];
+  });
+  return { ...state, loading: false, players: playerList };
+}
+
 export const removePlayer = (state, playerIndex) => {
   let playerList = state.players || [];
   playerList = playerList.filter((_player, index) => index !== playerIndex);

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { usePlayerContext } from "../utils/playerStore";
-import { ADD_PLAYER } from "../utils/actions";
+import { ADD_PLAYER, RESET_SCORES } from "../utils/actions";
 
 function PlayerAdder() {
   const playerDispatch = usePlayerContext()[1];
@@ -18,12 +18,17 @@ function PlayerAdder() {
     setNameFieldValue("");
     setNameFieldVisible(false);
   }
+
   function changeName() {
     setNameFieldValue(nameFieldRef.current.value);
   }
 
   function hideNameField() {
     setNameFieldVisible(false);
+  }
+
+  function resetScores() {
+    playerDispatch({ type: RESET_SCORES })
   }
 
   function showNameField() {
@@ -44,7 +49,10 @@ function PlayerAdder() {
           ref={nameFieldRef}
         />
       </form>
-      : <button id="addPlayer" onClick={showNameField}>Add player</button>}
+      : <>
+        <button id="addPlayer" onClick={showNameField}>Add player</button>
+        <button id="clearScores" onClick={resetScores}>Reset Scores</button>
+      </>}
   </>)
 }
 

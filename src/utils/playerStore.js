@@ -2,14 +2,16 @@ import { createContext, useContext, useReducer } from "react";
 import {
   addPlayer,
   removePlayer,
+  resetScores,
   setLoading,
   updateScoreForOnePlayer
 } from "./reducerFunctions";
 import {
+  ADD_A_SCORE,
   ADD_PLAYER,
   LOADING,
   REMOVE_PLAYER,
-  ADD_A_SCORE
+  RESET_SCORES
 } from "./actions";
 
 const PlayerContext = createContext({ loading: false, players: [] });
@@ -17,14 +19,16 @@ const { Provider } = PlayerContext;
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case ADD_A_SCORE:
+      return updateScoreForOnePlayer(state, action.playerIndex, action.newScore);
     case ADD_PLAYER:
       return addPlayer(state, action.playerName);
     case LOADING:
       return setLoading(state);
     case REMOVE_PLAYER:
       return removePlayer(state, action.playerIndex);
-    case ADD_A_SCORE:
-      return updateScoreForOnePlayer(state, action.playerIndex, action.newScore);
+    case RESET_SCORES:
+      return resetScores(state);
     default:
       return state;
   }

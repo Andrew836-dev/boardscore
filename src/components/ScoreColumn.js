@@ -23,31 +23,42 @@ function ScoreColumn({ dispatch, playerIndex, player }) {
   }
 
   return <div>
-    <h3>{name}</h3>
-    <button onClick={() => dispatch({ type: REMOVE_PLAYER, playerIndex })}>Remove Player</button>
-    {scoreEntryVisible
-      ? <form
-        onSubmit={handleFormSubmission}
-        onBlur={hideScoreField}
+    <div style={{ display: "flex" }}>
+      <h3>{name}</h3>
+      <button
+        onClick={() => dispatch({ type: REMOVE_PLAYER, playerIndex })}
       >
-        <label htmlFor="score">New Score</label>
-        <input
-          onChange={() => setScoreFieldValue(parseInt(scoreFieldRef.current.value))}
-          autoFocus={true}
-          type="number"
-          id="score"
-          name="score"
-          ref={scoreFieldRef}
-          value={scoreFieldValue}
-        />
-      </form>
-      : <button onClick={showScoreField}>Add scoring round</button>
-    }
-    {!!scores.length
-      && <ul>
-        {scores.map((score, index) => <li key={name + index} style={scores.length - 1 !== index ? { textDecorationLine: "line-through" } : { textDecorationLine: "none" }}>{score}</li>)}
-      </ul>}
-    Total Score: {!scores.length ? '0' : sumScoreTotals(scores)}
+        Remove
+      </button>
+    </div>
+    <div style={{ display: "inline-flex" }}>
+      {/* {!!scores.length
+        && <ul>
+          {scores.map((score, index) => <li key={name + index} style={scores.length - 1 !== index ? { textDecorationLine: "line-through" } : { textDecorationLine: "none" }}>{score}</li>)}
+        </ul>} */}
+        Score: {!scores.length ? '0' : sumScoreTotals(scores)}
+      {scoreEntryVisible
+        ? <form
+          className="blockDisplay"
+          onSubmit={handleFormSubmission}
+          onBlur={hideScoreField}
+        >
+          <label htmlFor="score">Add points</label>
+          <input
+            className="scoreInput"
+            onChange={() => setScoreFieldValue(parseInt(scoreFieldRef.current.value))}
+            autoFocus={true}
+            onFocus={({ currentTarget }) => currentTarget.select()}
+            type="number"
+            id="score"
+            name="score"
+            ref={scoreFieldRef}
+            value={scoreFieldValue}
+          />
+        </form>
+        : <button className="scoreButton" onClick={showScoreField}>Score</button>
+      }
+    </div>
   </div>;
 }
 
